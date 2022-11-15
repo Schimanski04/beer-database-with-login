@@ -1,0 +1,61 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.img-hover-zoom {
+    overflow: hidden;
+}
+
+.img-hover-zoom img {
+    transition: transform .5s ease;
+}
+
+.img-hover-zoom:hover img {
+    transform: scale(1.075);
+}
+
+ul li span {
+    padding-left: 5px;
+}
+
+li.address-li {
+    list-style-image: url('../images/icons/house-fill.svg');
+}
+
+li.phone-li {
+    list-style-image: url('../images/icons/telephone-fill.svg');
+}
+
+li.email-li {
+    list-style-image: url('../images/icons/envelope-fill.svg');
+}
+
+div.info, div.filters {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+div.info > div, div.filters > div {
+    width: 50%;
+}
+
+div.filters {
+    margin-bottom: 16px;
+}

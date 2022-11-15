@@ -1,0 +1,50 @@
+﻿@page
+@model BeerDatabase.Areas.Pubs.Pages.DetailsModel
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+
+<div class="card mb-3" style="width: 100%; border: 0;">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src="/images/apron.jpg" class="card-img-top" alt="kasírka">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h3 style="width: max-content;" class="card-title">@Model.Pub.Name</h3>
+                <h6>Hodnocení: @Model.Pub.Rating</h6>
+
+                <div style="position: absolute; top: 16px; right: 16px">
+                    <a asp-page="./Edit" asp-route-id="@Model.Pub.PubId" class="btn btn-primary">Upravit</a>
+                    <a asp-page="./Delete" asp-route-id="@Model.Pub.PubId" class="btn btn-danger">Vymazat</a>
+                </div>
+
+                <hr />
+
+                <h5>Kontakty:</h5>
+                <ul>
+                    <li class="address-li"><span>@Model.Pub.Location</span></li>
+                    <li class="phone-li"><span><a href="tel:@Model.Pub.PhoneNumber">@Model.Pub.PhoneNumber</a></span></li>
+                </ul>
+
+                <h5>Piva, které čepujeme:</h5>
+                <ul>
+                    @if (Model.Pub.Beers.Count == 0)
+                    {
+                        <li>Zatím nic netočíme, ale už pro vás vše připravujeme</li>
+                    }
+                    else
+                    {
+                        @foreach (var b in Model.Pub.Beers)
+                        {
+                            <li>@b.Name</li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

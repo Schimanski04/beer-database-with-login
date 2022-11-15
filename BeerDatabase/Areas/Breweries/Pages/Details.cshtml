@@ -1,0 +1,50 @@
+﻿@page
+@model BeerDatabase.Areas.Breweries.Pages.DetailsModel
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+
+<div class="card mb-3" style="width: 100%; border: 0;">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src="@Model.Brewery.ImgSrc" class="card-img-top" alt="@Model.Brewery.ImgTitle" title="@Model.Brewery.ImgTitle">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h3 style="width: max-content;" class="card-title">@Model.Brewery.Name</h3>
+
+                <div style="position: absolute; top: 16px; right: 16px">
+                    <a asp-page="./Edit" asp-route-id="@Model.Brewery.BreweryId" class="btn btn-primary">Upravit</a>
+                    <a asp-page="./Delete" asp-route-id="@Model.Brewery.BreweryId" class="btn btn-danger">Vymazat</a>
+                </div>
+
+                <hr />
+
+                <h5>Kontakty:</h5>
+                <ul>
+                    <li class="address-li"><span>@Model.Brewery.Location</span></li>
+                    <li class="phone-li"><span><a href="tel:@Model.Brewery.PhoneNumber">@Model.Brewery.PhoneNumber</a></span></li>
+                    <li class="email-li"><span><a href="mailto:@Model.Brewery.Email">@Model.Brewery.Email</a></span></li>
+                </ul>
+
+                <h5>Naše piva:</h5>
+                <ul>
+                    @if (Model.Brewery.Beers.Count == 0)
+                    {
+                        <li>Momentálně existuji pouze jako značka, ale piva už připravujeme</li>
+                    }
+                    else
+                    {
+                        @foreach (var b in Model.Brewery.Beers)
+                        {
+                            <li>@b.Name</li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

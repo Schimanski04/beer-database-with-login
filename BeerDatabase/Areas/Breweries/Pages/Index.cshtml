@@ -1,0 +1,32 @@
+﻿@page
+@model BeerDatabase.Areas.Breweries.Pages.IndexModel
+@{
+    ViewData["Title"] = "Pivovary";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (Model.Breweries.Count == 0)
+{
+    <h4>Seznam pivovarů je prázdný</h4>
+    <hr />
+}
+else
+{
+    <hr />
+
+    <div class="row row-cols-1 row-cols-md-6 g-4">
+        @foreach (var b in Model.Breweries)
+        {
+            <div class="col">
+                <div class="card">
+                    <div class="img-hover-zoom">
+                        <a asp-page="./Details" asp-route-id="@b.BreweryId"><img src="@b.ImgSrc" class="card-img-top" alt="@b.ImgTitle" title="@b.ImgTitle"></a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+<a asp-page="./Create" class="btn btn-primary" style="margin-top: 16px;" role="button">Přidat do databáze nový pivovar</a>

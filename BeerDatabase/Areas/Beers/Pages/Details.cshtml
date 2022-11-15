@@ -1,0 +1,59 @@
+﻿@page
+@model BeerDatabase.Areas.Beers.Pages.DetailsModel
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+
+<div class="card mb-3" style="width: 100%; border: 0;">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src="@Model.Beer.ImgSrc" class="card-img-top" alt="@Model.Beer.ImgTitle" title="@Model.Beer.ImgTitle">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h3 style="width: max-content;" class="card-title">@Model.Beer.Name</h3>
+                <h5 style="width: max-content;">@Model.Brewery.Name</h5>
+
+                <div style="position: absolute; top: 16px; right: 16px">
+                    <a asp-page="./Edit" asp-route-id="@Model.Beer.BeerId" class="btn btn-primary">Upravit</a>
+                    <a asp-page="./Delete" asp-route-id="@Model.Beer.BeerId" class="btn btn-danger">Vymazat</a>
+                </div>
+
+                <hr />
+
+                <p>@Model.Beer.Description</p>
+
+                <div class="info">
+                    <div>
+                        <h5>Dodatečné informace:</h5>
+                        <ul>
+                            <li>Druh piva: @Model.Kind.Type</li>
+                            <li>Obsah alkoholu: @Model.Beer.AlcoholContent%</li>
+                            <li>Cena za 0,5 l nebo za 1ks: @Model.Beer.PricePerHalfLitre Kč</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h5>Kde mě můžete získat?</h5>
+                        <ul>
+                            @if (Model.Beer.Pubs.Count == 0)
+                            {
+                                <li>Zatím nejsem nikde dostupný</li>
+                            }
+                            else
+                            {
+                                @foreach (var p in Model.Beer.Pubs)
+                                {
+                                    <li>@p.Name</li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,74 @@
+﻿@page
+@model BeerDatabase.Areas.Beers.Pages.EditModel
+@{
+    ViewData["Title"] = "Upravit";
+}
+
+<h1>@ViewData["Title"]</h1>
+<h4>Pivo</h4>
+<hr />
+
+<form class="row g-3" method="post">
+    <div class="col-md-12">
+        <label asp-for="@Model.Beer.Name" class="form-label">Název</label>
+        <input asp-for="@Model.Beer.Name" type="text" class="form-control">
+        <span asp-validation-for="@Model.Beer.Name" class="text-danger"></span>
+    </div>
+    <div class="col-md-12">
+        <select asp-for="@Model.Beer.BreweryId" class="form-select" aria-label="Default select example">
+            <option value="0" selected>Vyberte pivovar</option>
+
+            @foreach (var b in Model.Breweries)
+            {
+                <option value="@b.BreweryId">@b.Name</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-12">
+        <label asp-for="@Model.Beer.Description" class="form-label">Popis</label>
+        <textarea asp-for="@Model.Beer.Description" class="form-control" rows="4"></textarea>
+        <span asp-validation-for="@Model.Beer.Description" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-12">
+        <fieldset class="border p-2" style="border-radius: .25rem;">
+            <legend class="w-auto">Druh piva</legend>
+            @foreach (var k in Model.Kinds)
+            {
+                <div class="form-check">
+                    <input asp-for="@Model.Beer.KindId" class="form-check-input" type="radio" id="@k.KindId" value="@k.KindId">
+                    <label class="form-check-label" for="@k.KindId">
+                        @k.Type
+                    </label>
+                </div>
+            }
+            <span asp-validation-for="@Model.Beer.KindId" class="text-danger"></span>
+        </fieldset>
+    </div>
+
+    <div class="col-md-12">
+        <label asp-for="@Model.AlcoholContent" class="form-label">Obsah alkoholu (v <b>%</b> na objem piva)</label>
+        <input asp-for="@Model.AlcoholContent" type="number" min="0" max="100" step="0.1" class="form-control">
+        <span asp-validation-for="@Model.AlcoholContent" class="text-danger"></span>
+    </div>
+    <div class="col-md-12">
+        <label asp-for="@Model.PricePerHalfLitre" class="form-label">Cena piva za <b>0,5 l</b> nebo za <b>1 ks</b> s DPH</label>
+        <input asp-for="@Model.PricePerHalfLitre" type="number" min="0" step="0.01" class="form-control">
+        <span asp-validation-for="@Model.PricePerHalfLitre" class="text-danger"></span>
+    </div>
+    <div class="col-md-12">
+        <label asp-for="@Model.Beer.ImgSrc" class="form-label">Zdrojová adresa náhledového obrázku (ideálně v poměru 1:1)</label>
+        <input asp-for="@Model.Beer.ImgSrc" type="text" class="form-control">
+        <span asp-validation-for="@Model.Beer.ImgSrc" class="text-danger"></span>
+    </div>
+    <div class="col-md-12">
+        <label asp-for="@Model.Beer.ImgTitle" class="form-label">Popis náhledového obrázku</label>
+        <input asp-for="@Model.Beer.ImgTitle" type="text" class="form-control">
+        <span asp-validation-for="@Model.Beer.ImgTitle" class="text-danger"></span>
+    </div>
+
+    <div class="col-12">
+        <button class="btn btn-primary" type="submit">Upravit</button>
+        <a asp-page="./Details" asp-route-id="@Model.Beer.BeerId" class="btn btn-secondary" role="button">Zrušit</a>
+    </div>
+</form>

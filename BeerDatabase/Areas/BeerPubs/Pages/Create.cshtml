@@ -1,0 +1,40 @@
+﻿@page
+@model BeerDatabase.Areas.BeerPubs.Pages.CreateModel
+@{
+    ViewData["Title"] = "Vytvořit";
+}
+
+<h1>Přidat do databáze</h1>
+<h4>Vazbu pivo – hospoda</h4>
+<hr />
+
+<form class="row g-3" method="post">
+    <div class="col-md-6">
+        <select asp-for="@Model.BeerPub.BeerId" class="form-select" aria-label="Default select example">
+            <option value="0" selected>Zvolte pivo</option>
+
+            @foreach (var b in Model.Beers)
+            {
+                <option value="@b.BeerId">@b.Name</option>
+            }
+        </select>
+        <span asp-validation-for="@Model.BeerPub.BeerId" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <select asp-for="@Model.BeerPub.PubId" class="form-select" aria-label="Default select example">
+            <option value="0" selected>Zvolte hospodu</option>
+
+            @foreach (var p in Model.Pubs)
+            {
+                <option value="@p.PubId">@p.Name</option>
+            }
+        </select>
+        <span asp-validation-for="@Model.BeerPub.PubId" class="text-danger"></span>
+    </div>
+
+    <div class="col-12">
+        <button class="btn btn-primary" type="submit">Přidat</button>
+        <a asp-page="./Index" class="btn btn-secondary" role="button">Zrušit</a>
+    </div>
+</form>

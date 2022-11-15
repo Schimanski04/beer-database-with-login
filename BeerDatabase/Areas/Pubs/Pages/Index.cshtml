@@ -1,0 +1,69 @@
+﻿@page
+@model BeerDatabase.Areas.Pubs.Pages.IndexModel
+@{
+    ViewData["Title"] = "Hospody";
+}
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+
+@if (Model.Pubs.Count == 0)
+{
+    <h4>Seznam hospod je prázdný</h4>
+}
+else
+{
+    <p>
+        <a class="btn btn-primary collapsed" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Filtry</a>
+        <a asp-page="./Index" asp-area="Pubs" class="btn btn-primary">Zobrazit celý seznam</a>
+    </p>
+    <div class="collapse" id="collapseExample" style="">
+        <div class="card card-body">
+            <form asp-page="./Pub" class="form-actions row g-3" method="get">
+                <div class="col-md-12">
+                    <label asp-for="@Model.CurrentFilter" class="form-label">Hledat název hospody:</label>
+                    <input asp-for="@Model.CurrentFilter" type="text" class="form-control" name="SearchString">
+                </div>
+                <div class="col-12">
+                    <button class="btn btn-primary" type="submit">Hledat</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <a asp-page="./Index" asp-area="Pubs" asp-route-sortOrder="@Model.NameSort" style="text-decoration: none;">
+                        Název hospody
+                    </a>
+                </th>
+                <th style="text-align: center;">
+                    <a asp-page="./Index" asp-area="Pubs" asp-route-sortOrder="@Model.RatingSort" style="text-decoration: none;">
+                        Hodnocení
+                    </a>
+                </th>
+                <th>Adresa</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in Model.Pubs)
+            {
+                <tr>
+                    <td>@p.Name</td>
+                    <td class="text-center">@p.Rating</td>
+                    <td>@p.Location</td>
+                    <td>
+                        <a asp-page="./Details" asp-area="Pubs" asp-route-id="@p.PubId" class="btn btn-primary" role="button">Detail</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<a asp-page="./Create" asp-area="Pubs" class="btn btn-primary" style="margin-top: 16px;" role="button">Přidat do databáze novou hospodu</a>
+<a asp-page="./Create" asp-area="BeerPubs" class="btn btn-primary" style="margin-top: 16px;" role="button">Přidat vazbu pivo – hospoda</a>
+<a asp-page="./Delete" asp-area="BeerPubs" class="btn btn-danger" style="margin-top: 16px;" role="button">Odstranit vazbu pivo – hospoda</a>

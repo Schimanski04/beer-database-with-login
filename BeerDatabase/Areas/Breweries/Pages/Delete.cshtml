@@ -1,0 +1,17 @@
+﻿@page
+@model BeerDatabase.Areas.Breweries.Pages.DeleteModel
+@{
+    ViewData["Title"] = "Vymazat";
+}
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+
+<fieldset class="border p-2" style="border-radius: .25rem;">
+    <legend class="w-auto">Opravdu si přejete položku vymazat z databáze?</legend>
+
+    <div class="col-md-12" style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
+        <a asp-page-handler="Delete" asp-route-id="@Model.Id" class="btn btn-success" role="button" style="width: 49%;">Ano</a>
+        <a asp-page="./Details" asp-route-id="@Model.Id" class="btn btn-danger" role="button" style="width: 49%;">Ne</a>
+    </div>
+</fieldset>

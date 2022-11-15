@@ -1,0 +1,26 @@
+﻿@page
+@model BeerDatabase.Areas.BeerPubs.Pages.DeleteModel
+@{
+    ViewData["Title"] = "Vymazat";
+}
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+
+<form class="row g-3" method="post">
+    <div class="col-md-12">
+        <select asp-for="@Model.Select" class="form-select" aria-label="Default select example">
+            <option value="0">Vyberte vazbu</option>
+
+            @foreach (var bp in Model.BeerPubs)
+            {
+                <option value="@bp.BeerId;@bp.PubId">@bp.Pub.Name (@bp.Beer.Name)</option>
+            }
+        </select>
+    </div>
+
+    <div class="col-12">
+        <button class="btn btn-danger" type="submit">Vymazat</button>
+        <a asp-page="./Index" class="btn btn-danger" role="button">Zrušit</a>
+    </div>
+</form>

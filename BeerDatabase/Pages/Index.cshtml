@@ -1,0 +1,58 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Přehled";
+}
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col">
+        <div class="card">
+            <div class="img-hover-zoom">
+                <a asp-page="./Index" asp-area="Breweries"><img src="./images/brewery.jpg" class="card-img-top" alt="Pilsner Urquell pivovar"></a>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Pivovary</h5>
+                <p class="card-text">Seznam, který obsahuje všechny pivovary, co jsou uložené v databázi.</p>
+                <a asp-page="./Index" asp-area="Breweries" class="btn btn-primary">Zobrazit seznam</a>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card">
+            <div class="img-hover-zoom">
+                <a asp-page="./Index" asp-area="Beers"><img src="./images/beer.jpg" class="card-img-top" alt="Pivo"></a>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Piva</h5>
+                <p class="card-text">Seznam, který obsahuje všechny piva, co jsou uložené v databázi.</p>
+                <a asp-page="./Index" asp-area="Beers" class="btn btn-primary">Zobrazit seznam</a>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card">
+            <div class="img-hover-zoom">
+                <a asp-page="./Index" asp-area="Pubs"><img src="./images/pub.jpg" class="card-img-top" alt="Hospoda"></a>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Hospody</h5>
+                <p class="card-text">Seznam, který obsahuje všechny hospody a restaurace, co jsou uložené v databázi.</p>
+                <a asp-page="./Index" asp-area="Pubs" class="btn btn-primary">Zobrazit seznam</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (Model.SuccessMessage != null)
+{
+    <div class="alert alert-success text-center" style="margin-top: 16px;" role="alert">
+        @Model.SuccessMessage
+    </div>
+}
+
+@if (Model.InfoMessage != null)
+{
+    <div class="alert alert-primary text-center" style="margin-top: 16px;" role="alert">
+        @Model.InfoMessage
+    </div>
+}
