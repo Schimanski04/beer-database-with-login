@@ -45,6 +45,8 @@ namespace BeerDatabase.Data
 
 
             // Default data
+            builder.Entity<IdentityRole>().HasData(new IdentityRole { Id = "", Name = "", NormalizedName = "", ConcurrencyStamp = "" });
+
             builder.Entity<Kind>().HasData(new Kind { KindId = 1, Type = "světlé" },
                 new Kind { KindId = 2, Type = "polotmavé" },
                 new Kind { KindId = 3, Type = "tmavé" },

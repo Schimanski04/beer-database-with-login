@@ -17,10 +17,13 @@
                 <h3 style="width: max-content;" class="card-title">@Model.Pub.Name</h3>
                 <h6>Hodnocení: @Model.Pub.Rating</h6>
 
-                <div style="position: absolute; top: 16px; right: 16px">
-                    <a asp-page="./Edit" asp-route-id="@Model.Pub.PubId" class="btn btn-primary">Upravit</a>
-                    <a asp-page="./Delete" asp-route-id="@Model.Pub.PubId" class="btn btn-danger">Vymazat</a>
-                </div>
+                @if (Model.IsAdministrator == true)
+                {
+                    <div style="position: absolute; top: 16px; right: 16px">
+                        <a asp-page="./Edit" asp-route-id="@Model.Pub.PubId" class="btn btn-primary">Upravit</a>
+                        <a asp-page="./Delete" asp-route-id="@Model.Pub.PubId" class="btn btn-danger">Vymazat</a>
+                    </div>
+                }
 
                 <hr />
 

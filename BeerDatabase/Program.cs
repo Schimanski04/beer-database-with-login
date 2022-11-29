@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
-//var config = builder.Configuration;
+var config = builder.Configuration;
 
 // Add services to the container.
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -21,33 +21,38 @@ builder.Services.AddDefaultIdentity<IdentityUser>(
     )
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Administrator", policy => policy.RequireRole("Administrator")); // má roli
+});
+
 // Prihlaseni pomoci uctu tretich stran
-//builder.Services.AddAuthentication()
-//   .AddGoogle(options =>
-//   {
-//       IConfigurationSection googleAuthNSection =
-//       config.GetSection("Authentication:Google");
-//       options.ClientId = googleAuthNSection["ClientId"];
-//       options.ClientSecret = googleAuthNSection["ClientSecret"];
-//   })
-//   .AddFacebook(options =>
-//   {
-//       IConfigurationSection FBAuthNSection =
-//       config.GetSection("Authentication:FB");
-//       options.ClientId = FBAuthNSection["ClientId"];
-//       options.ClientSecret = FBAuthNSection["ClientSecret"];
-//   })
-//   .AddMicrosoftAccount(microsoftOptions =>
-//   {
-//       microsoftOptions.ClientId = config["Authentication:Microsoft:ClientId"];
-//       microsoftOptions.ClientSecret = config["Authentication:Microsoft:ClientSecret"];
-//   })
-//   .AddTwitter(twitterOptions =>
-//   {
-//       twitterOptions.ConsumerKey = config["Authentication:Twitter:ConsumerAPIKey"];
-//       twitterOptions.ConsumerSecret = config["Authentication:Twitter:ConsumerSecret"];
-//       twitterOptions.RetrieveUserDetails = true;
-//   });
+builder.Services.AddAuthentication()
+   //.AddGoogle(options =>
+   //{
+   //    IConfigurationSection googleAuthNSection =
+   //    config.GetSection("Authentication:Google");
+   //    options.ClientId = googleAuthNSection["ClientId"];
+   //    options.ClientSecret = googleAuthNSection["ClientSecret"];
+   //})
+   //.AddFacebook(options =>
+   //{
+   //    IConfigurationSection FBAuthNSection =
+   //    config.GetSection("Authentication:FB");
+   //    options.ClientId = FBAuthNSection["ClientId"];
+   //    options.ClientSecret = FBAuthNSection["ClientSecret"];
+   //})
+   .AddMicrosoftAccount(microsoftOptions =>
+   {
+       microsoftOptions.ClientId = "33751154-5532-4296-b56d-3c193ea092a8";
+       microsoftOptions.ClientSecret = "HuL8Q~DMc2E-6LzTWDJv3NFvKLLgdwNGht2ANali";
+   });
+    //.AddTwitter(twitterOptions =>
+    //{
+    //    twitterOptions.ConsumerKey = config["Authentication:Twitter:ConsumerAPIKey"];
+    //    twitterOptions.ConsumerSecret = config["Authentication:Twitter:ConsumerSecret"];
+    //    twitterOptions.RetrieveUserDetails = true;
+    //});
 
 builder.Services.AddRazorPages();
 

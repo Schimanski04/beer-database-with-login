@@ -2,6 +2,7 @@ using BeerDatabase.Data;
 using BeerDatabase.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Security.Claims;
 
 namespace BeerDatabase.Areas.Pubs.Pages
 {
@@ -16,6 +17,7 @@ namespace BeerDatabase.Areas.Pubs.Pages
             _context = context;
         }
 
+        public bool IsAdministrator { get; set; }
         public Pub? Pub { get; set; }
 
         public ActionResult OnGet(int id)
@@ -27,6 +29,18 @@ namespace BeerDatabase.Areas.Pubs.Pages
             }
 
             _context.Entry(Pub).Collection(b => b.Beers).Load();
+
+            ClaimsPrincipal cp = this.User;
+            if (cp.IsInRole("Administrator"))
+            {
+                IsAdministrator = true;
+            }
+            else
+            {
+                IsAdministrator = false;
+            }
+
+            //Console.WriteLine(IsAdministrator);
 
             return Page();
         }

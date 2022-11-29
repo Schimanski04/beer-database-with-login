@@ -29,4 +29,7 @@ else
     </div>
 }
 
-<a asp-page="./Create" class="btn btn-primary" style="margin-top: 16px;" role="button">Přidat do databáze nový pivovar</a>
+@if (Model.IsAdministrator == true)
+{
+    <a asp-page="./Create" class="btn btn-primary" style="margin-top: 16px;" role="button">Přidat do databáze nový pivovar</a>
+}

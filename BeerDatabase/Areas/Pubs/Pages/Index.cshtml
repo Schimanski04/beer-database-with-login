@@ -64,6 +64,9 @@ else
     </table>
 }
 
-<a asp-page="./Create" asp-area="Pubs" class="btn btn-primary" style="margin-top: 16px;" role="button">Přidat do databáze novou hospodu</a>
-<a asp-page="./Create" asp-area="BeerPubs" class="btn btn-primary" style="margin-top: 16px;" role="button">Přidat vazbu pivo – hospoda</a>
-<a asp-page="./Delete" asp-area="BeerPubs" class="btn btn-danger" style="margin-top: 16px;" role="button">Odstranit vazbu pivo – hospoda</a>
+@if (Model.IsAdministrator == true)
+{
+    <a asp-page="./Create" asp-area="Pubs" class="btn btn-primary" style="margin-top: 16px;" role="button">Přidat do databáze novou hospodu</a>
+    <a asp-page="./Create" asp-area="BeerPubs" class="btn btn-primary" style="margin-top: 16px;" role="button">Přidat vazbu pivo – hospoda</a>
+    <a asp-page="./Delete" asp-area="BeerPubs" class="btn btn-danger" style="margin-top: 16px;" role="button">Odstranit vazbu pivo – hospoda</a>
+}

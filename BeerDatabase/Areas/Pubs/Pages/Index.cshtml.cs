@@ -3,6 +3,7 @@ using BeerDatabase.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace BeerDatabase.Areas.Pubs.Pages
 {
@@ -17,6 +18,7 @@ namespace BeerDatabase.Areas.Pubs.Pages
             _context = context;
         }
 
+        public bool IsAdministrator { get; set; }
         public List<Beer> Beers { get; set; }
         public List<Pub> Pubs { get; set; }
 
@@ -58,6 +60,18 @@ namespace BeerDatabase.Areas.Pubs.Pages
 
             Pubs = await pubsSort.AsNoTracking().ToListAsync();
             Beers = _context.Beers.ToList();
+
+            ClaimsPrincipal cp = this.User;
+            if (cp.IsInRole("Administrator"))
+            {
+                IsAdministrator = true;
+            }
+            else
+            {
+                IsAdministrator = false;
+            }
+
+            //Console.WriteLine(IsAdministrator);
         }
     }
 }

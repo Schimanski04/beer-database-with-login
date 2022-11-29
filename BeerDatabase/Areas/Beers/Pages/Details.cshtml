@@ -17,10 +17,13 @@
                 <h3 style="width: max-content;" class="card-title">@Model.Beer.Name</h3>
                 <h5 style="width: max-content;">@Model.Brewery.Name</h5>
 
-                <div style="position: absolute; top: 16px; right: 16px">
-                    <a asp-page="./Edit" asp-route-id="@Model.Beer.BeerId" class="btn btn-primary">Upravit</a>
-                    <a asp-page="./Delete" asp-route-id="@Model.Beer.BeerId" class="btn btn-danger">Vymazat</a>
-                </div>
+                @if (Model.IsAdministrator == true)
+                {
+                    <div style="position: absolute; top: 16px; right: 16px">
+                        <a asp-page="./Edit" asp-route-id="@Model.Beer.BeerId" class="btn btn-primary">Upravit</a>
+                        <a asp-page="./Delete" asp-route-id="@Model.Beer.BeerId" class="btn btn-danger">Vymazat</a>
+                    </div>
+                }
 
                 <hr />
 
